@@ -1,0 +1,13 @@
+{
+  "name": "chopin-next-auto",
+  "version": "1.0.0",
+  "main": "index.mjs",
+  "license": "MIT",
+  "devDependencies": {
+    "dotenv": "^16.0.3"
+  },
+  "dependencies": {
+    "fetch-cookie": "^2.1.0",
+    "jsonpath-plus": "^7.2.0"
+  }
+}
