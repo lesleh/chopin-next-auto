@@ -10,7 +10,7 @@ import {
 
 const getPrimaryTrade = getQuestion("primary_trade");
 
-const journey = await createJourney();
+const journey = await createJourney("business");
 console.log(getPrimaryTrade(journey));
 
 const response = await patchJourney(

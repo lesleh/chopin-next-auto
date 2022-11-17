@@ -3,7 +3,7 @@ import { JSONPath } from "jsonpath-plus";
 import { fetchCookie } from "./fetchCookie.mjs";
 import { exists } from "./util.mjs";
 
-export async function createJourney() {
+export async function createJourney(verticalName) {
   if (
     process.env.CACHE_RESPONSES === "true" &&
     (await exists("journey.json"))
@@ -19,7 +19,7 @@ export async function createJourney() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        verticalName: "business",
+        verticalName,
       }),
     }
   );
