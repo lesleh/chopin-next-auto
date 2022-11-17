@@ -1,12 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config();
-import { JSONPath } from "jsonpath-plus";
-import {
-  createJourney,
-  patchJourney,
-  getRequiredQuestions,
-  getQuestion,
-} from "./journey.mjs";
+import { createJourney, patchJourney, getQuestion } from "./journey.mjs";
 
 const getPrimaryTrade = getQuestion("primary_trade");
 

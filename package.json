@@ -3,8 +3,13 @@
   "version": "1.0.0",
   "main": "index.mjs",
   "license": "MIT",
+  "scripts": {
+    "start": "node .",
+    "lint": "eslint . --ext .js,.mjs"
+  },
   "devDependencies": {
-    "dotenv": "^16.0.3"
+    "dotenv": "^16.0.3",
+    "eslint": "^8.27.0"
   },
   "dependencies": {
     "fetch-cookie": "^2.1.0",
