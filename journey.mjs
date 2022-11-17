@@ -24,10 +24,7 @@ export async function createJourney() {
     }
   );
 
-  const text = await response.text();
-  await fs.writeFile("journey.html", text);
-
-  const json = JSON.parse(text);
+  const json = await response.json();
 
   if (process.env.CACHE_RESPONSES) {
     await fs.writeFile("journey.json", JSON.stringify(json));
@@ -63,4 +60,13 @@ export function getRequiredQuestions(json) {
     path: "$..questions[?(@.required)]",
     json,
   });
+}
+
+export function getQuestion(name) {
+  return function (json) {
+    return JSONPath({
+      path: `$..questions[?(@.name === '${name}')]`,
+      json,
+    })[0];
+  };
 }

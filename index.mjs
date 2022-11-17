@@ -1,13 +1,17 @@
 import dotenv from "dotenv";
 dotenv.config();
+import { JSONPath } from "jsonpath-plus";
 import {
   createJourney,
   patchJourney,
   getRequiredQuestions,
+  getQuestion,
 } from "./journey.mjs";
 
+const getPrimaryTrade = getQuestion("primary_trade");
+
 const journey = await createJourney();
-console.log(getRequiredQuestions(journey));
+console.log(getPrimaryTrade(journey));
 
 const response = await patchJourney(
   journey.id,
@@ -18,4 +22,4 @@ const response = await patchJourney(
   }
 );
 
-console.log(getRequiredQuestions(journey));
+console.log(getPrimaryTrade(response));
