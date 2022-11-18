@@ -62,6 +62,13 @@ export function getRequiredQuestions(json) {
   });
 }
 
+export function getRequiredUnfilledQuestions(json) {
+  return JSONPath({
+    path: "$..questions[?(@.required === true && @.value === '' && @.visible === true)]",
+    json,
+  });
+}
+
 export function getQuestion(name) {
   return function (json) {
     return JSONPath({

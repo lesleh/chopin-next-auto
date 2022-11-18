@@ -1,3 +1,5 @@
 node_modules
 *.json
 yarn-error.log
+
+!answer_sets/*.json

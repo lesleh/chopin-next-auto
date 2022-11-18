@@ -1,19 +1,29 @@
+import fs from "fs/promises";
 import dotenv from "dotenv";
 dotenv.config();
-import { createJourney, patchJourney, getQuestion } from "./journey.mjs";
+import {
+  getRequiredUnfilledQuestions,
+  createJourney,
+  patchJourney,
+} from "./journey.mjs";
+import answerJson from "./answer_sets/business.json" assert { type: "json" };
 
-const getPrimaryTrade = getQuestion("primary_trade");
+console.log("Creating journey...");
+let response = await createJourney("business");
+let authenticityToken = response.authenticityToken;
+const savedResponses = [];
 
-const journey = await createJourney("business");
-console.log(getPrimaryTrade(journey));
+for (const answers of answerJson.answerSet) {
+  console.log("Patching journey...");
+  response = await patchJourney(
+    response.id,
+    response.journeyToken,
+    authenticityToken,
+    answers
+  );
+  savedResponses.push(response);
 
-const response = await patchJourney(
-  journey.id,
-  journey.journeyToken,
-  journey.authenticityToken,
-  {
-    primary_trade: "Builder",
-  }
-);
+  authenticityToken = response.authenticityToken;
+}
 
-console.log(getPrimaryTrade(response));
+fs.writeFile("responses.json", JSON.stringify(savedResponses, null, 2));
